@@ -4,6 +4,8 @@ const fs = require('fs')
 
 const app = express()
 
+app.use(express.json()) // IMPORTANT
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../frontend/index.html`))
 })
@@ -22,7 +24,7 @@ app.get('/beers', (req, res) => {
 })
 
 app.get('/beers/:id', (req, res) => {
-  let paramId = parseInt(req.params.id)
+  const paramId = parseInt(req.params.id)
   let response = 'beer not found'
 
   fs.readFile(`${__dirname}/data/data.json`, (err, data) => {
@@ -30,15 +32,46 @@ app.get('/beers/:id', (req, res) => {
       console.log('hiba:', err)
       return res.status(500).send('error at reading file')
     } else {
-      const beerData = JSON.parse(data)
-      
-      beerData.forEach(beer => {
+      const beersData = JSON.parse(data)
+
+      beersData.forEach(beer => {
         if (beer.id === paramId) {
           response = beer;
         }
       })
 
       return res.send(response)
+    }
+  })
+})
+
+app.post('/beers/:id', (req, res) => {
+  const paramId = parseInt(req.params.id)
+  const newBeerData = req.body;
+
+  console.log(newBeerData)
+  
+  fs.readFile(`${__dirname}/data/data.json`, (err, data) => {
+    if (err) {
+      console.log('error:', err)
+      return res.status(500).send(err)
+    } else {
+      const beersData = JSON.parse(data)
+
+      for (let i = 0; i < beersData.length; i++) {
+        if (beersData[i].id === paramId) {
+          beersData[i] = newBeerData
+        }
+      }
+
+      fs.writeFile(`${__dirname}/data/data.json`, JSON.stringify(beersData, null, 2), (err) => {
+        if (err) {
+          console.log('error', err)
+          return res.status(500).send(err)
+        } else {
+          return res.send({response: "done"})
+        }
+      })
     }
   })
 })

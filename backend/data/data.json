@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "name": "soproni világos",
-    "price": 259,
+    "name": "soproni",
+    "price": 309,
     "rating": 4
   },
   {
     "id": 2,
-    "name": "guinness dark",
-    "price": 899,
+    "name": "guinness",
+    "price": 559,
     "rating": 10
   },
   {
@@ -21,7 +21,7 @@
     "id": 4,
     "name": "arany fácán",
     "price": 199,
-    "rating": 3
+    "rating": 4
   },
   {
     "id": 5,
