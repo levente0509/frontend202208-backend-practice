@@ -48,8 +48,6 @@ app.get('/beers/:id', (req, res) => {
 app.post('/beers/:id', (req, res) => {
   const paramId = parseInt(req.params.id)
   const newBeerData = req.body;
-
-  console.log(newBeerData)
   
   fs.readFile(`${__dirname}/data/data.json`, (err, data) => {
     if (err) {
