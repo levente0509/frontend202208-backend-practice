@@ -1,0 +1,27 @@
+[
+  {
+    "name": "soproni világos",
+    "price": 259,
+    "rating": 4
+  },
+  {
+    "name": "guinness dark",
+    "price": 899,
+    "rating": 10
+  },
+  {
+    "name": "kőbánya classic",
+    "price": 189,
+    "rating": 9
+  },
+  {
+    "name": "arany fácán",
+    "price": 199,
+    "rating": 3
+  },
+  {
+    "name": "rákóczi, a szabadság íze",
+    "price": 180,
+    "rating": 2
+  }
+]
