@@ -21,4 +21,26 @@ app.get('/beers', (req, res) => {
   })
 })
 
+app.get('/beers/:id', (req, res) => {
+  let paramId = parseInt(req.params.id)
+  let response = 'beer not found'
+
+  fs.readFile(`${__dirname}/data/data.json`, (err, data) => {
+    if (err) {
+      console.log('hiba:', err)
+      return res.status(500).send('error at reading file')
+    } else {
+      const beerData = JSON.parse(data)
+      
+      beerData.forEach(beer => {
+        if (beer.id === paramId) {
+          response = beer;
+        }
+      })
+
+      return res.send(response)
+    }
+  })
+})
+
 app.listen(2022, console.log('server listening on http://127.0.0.1:2022'))
